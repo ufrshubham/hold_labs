@@ -14,6 +14,8 @@ class HoldLabsGame extends FlameGame
           camera: CameraComponent.withFixedResolution(width: 320, height: 180),
         );
 
+  Level? currentLevel;
+
   @override
   Color backgroundColor() {
     return const Color.fromARGB(255, 184, 187, 202);
@@ -32,6 +34,12 @@ class HoldLabsGame extends FlameGame
         'PortalPad.png',
       ],
     );
-    await world.add(Level());
+    changeLevel(1);
+  }
+
+  void changeLevel(int levelId) {
+    currentLevel?.removeFromParent();
+    currentLevel = Level(levelId);
+    world.add(currentLevel!);
   }
 }

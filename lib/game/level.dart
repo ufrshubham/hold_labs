@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/experimental.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -9,9 +10,16 @@ import 'package:hold_labs/game/player.dart';
 import 'package:hold_labs/game/tiled_object_ext.dart';
 
 class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
+  Level(this.levelId);
+
+  final int levelId;
+
   @override
   Future<void> onLoad() async {
-    final map = await TiledComponent.load('Level1.tmx', Vector2.all(16));
+    final map = await TiledComponent.load(
+      'Level$levelId.tmx',
+      Vector2.all(16),
+    );
     await add(map);
 
     await _handleSpawnPoints(map);
@@ -55,6 +63,13 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
               final player = Player(position: object.position, priority: 1);
               await add(player);
               game.camera.follow(player.cameraTarget);
+            } else {
+              final portalHitbox = RectangleHitbox(
+                collisionType: CollisionType.passive,
+              );
+              portalHitbox.onCollisionStartCallback =
+                  (_, other) => _onPortalEnter(other);
+              await portal.add(portalHitbox);
             }
             break;
         }
@@ -78,6 +93,12 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
             break;
         }
       }
+    }
+  }
+
+  void _onPortalEnter(PositionComponent other) {
+    if (other.parent is Player) {
+      game.changeLevel(levelId);
     }
   }
 }
