@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
+import 'package:flame/input.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hold_labs/game/level.dart';
 
-class HoldLabsGame extends FlameGame with HasCollisionDetection {
+class HoldLabsGame extends FlameGame
+    with HasCollisionDetection, HasKeyboardHandlerComponents {
   HoldLabsGame()
       : super(
           camera: CameraComponent.withFixedResolution(width: 320, height: 180),
@@ -14,7 +16,7 @@ class HoldLabsGame extends FlameGame with HasCollisionDetection {
 
   @override
   Color backgroundColor() {
-    return const Color.fromARGB(255, 109, 100, 100);
+    return const Color.fromARGB(255, 184, 187, 202);
   }
 
   @override

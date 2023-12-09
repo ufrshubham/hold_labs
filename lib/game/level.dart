@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/experimental.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:hold_labs/game/game.dart';
+import 'package:hold_labs/game/platform.dart';
 import 'package:hold_labs/game/player.dart';
 import 'package:hold_labs/game/tiled_object_ext.dart';
 
@@ -59,6 +59,7 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
 
             final player = Player(position: object.position);
             await add(player);
+            game.camera.follow(player.cameraTarget);
             break;
         }
       }
@@ -73,10 +74,9 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
       for (final object in objects) {
         switch (object.class_) {
           case 'Platform':
-            final portal = RectangleHitbox(
+            final portal = Platform(
               position: object.position,
               size: object.size,
-              collisionType: CollisionType.passive,
             );
             await add(portal);
             break;
