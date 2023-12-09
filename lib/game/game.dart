@@ -29,6 +29,7 @@ class HoldLabsGame extends FlameGame
       [
         'Player.png',
         'Tiles.png',
+        'PortalPad.png',
       ],
     );
     await world.add(Level());

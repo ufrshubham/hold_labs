@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/experimental.dart';
+import 'package:flame/palette.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/material.dart';
 import 'package:hold_labs/game/game.dart';
 import 'package:hold_labs/game/platform.dart';
 import 'package:hold_labs/game/player.dart';
@@ -35,31 +38,30 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
     final objects = spawnPointsLayer?.objects;
 
     if (objects != null) {
+      final portalPaint = Paint()..color = Colors.red;
+      portalPaint.blendMode = BlendMode.difference;
       for (final object in objects) {
         switch (object.class_) {
           case 'Start':
-            final tiles = game.images.fromCache('Tiles.png');
-            final portal = SpriteComponent(
-              position: object.position,
-              anchor: Anchor.center,
+          case 'End':
+            final portal = SpriteAnimationComponent.fromFrameData(
+              position: object.position - Vector2(0, 3),
               scale: Vector2.all(1.2),
-              sprite: Sprite(
-                tiles,
-                srcSize: Vector2.all(16),
-                srcPosition: Vector2(16 * 2, 0),
+              paint: portalPaint,
+              game.images.fromCache('PortalPad.png'),
+              SpriteAnimationData.sequenced(
+                amount: 3,
+                stepTime: 0.2,
+                textureSize: Vector2.all(16),
               ),
-              children: [
-                RotateEffect.by(
-                  -2 * pi,
-                  EffectController(infinite: true, duration: 0.1),
-                ),
-              ],
             );
             await add(portal);
 
-            final player = Player(position: object.position);
-            await add(player);
-            game.camera.follow(player.cameraTarget);
+            if (object.class_ == 'Start') {
+              final player = Player(position: object.position);
+              await add(player);
+              game.camera.follow(player.cameraTarget);
+            }
             break;
         }
       }
