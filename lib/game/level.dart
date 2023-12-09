@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/experimental.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:hold_labs/game/game.dart';
 import 'package:hold_labs/game/platform.dart';
@@ -13,6 +14,8 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
   Level(this.levelId);
 
   final int levelId;
+  late final Player _player;
+  final _loadedAudio = <String>[];
 
   @override
   Future<void> onLoad() async {
@@ -24,6 +27,7 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
 
     await _handleSpawnPoints(map);
     await _handleColliders(map);
+    await _handleAudio(map);
 
     final halfResolution = game.camera.viewport.virtualSize * 0.5;
     game.camera.setBounds(
@@ -60,9 +64,9 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
             await add(portal);
 
             if (object.class_ == 'Start') {
-              final player = Player(position: object.position, priority: 1);
-              await add(player);
-              game.camera.follow(player.cameraTarget);
+              _player = Player(position: object.position, priority: 1);
+              await add(_player);
+              game.camera.follow(_player.cameraTarget);
             } else {
               final portalHitbox = RectangleHitbox(
                 collisionType: CollisionType.passive,
@@ -78,8 +82,8 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
   }
 
   Future<void> _handleColliders(TiledComponent map) async {
-    final spawnPointsLayer = map.tileMap.getLayer<ObjectGroup>('Colliders');
-    final objects = spawnPointsLayer?.objects;
+    final collidersLayer = map.tileMap.getLayer<ObjectGroup>('Colliders');
+    final objects = collidersLayer?.objects;
 
     if (objects != null) {
       for (final object in objects) {
@@ -96,9 +100,88 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
     }
   }
 
+  Future<void> _handleAudio(TiledComponent map) async {
+    final audioLayer = map.tileMap.getLayer<ObjectGroup>('AudioTriggers');
+    final objects = audioLayer?.objects;
+
+    if (objects != null) {
+      for (final object in objects) {
+        switch (object.class_) {
+          case 'AutoStart':
+            final audioPath = object.properties
+                .getValue<String>('Audio')
+                ?.split('audio/')
+                .last;
+            if (audioPath != null) {
+              _player.moveLock = true;
+
+              await FlameAudio.audioCache.load(audioPath);
+              _loadedAudio.add(audioPath);
+
+              final audioplayer = await FlameAudio.playLongAudio(audioPath);
+              audioplayer.onPlayerComplete.listen(
+                (event) {
+                  _player.moveLock = false;
+                },
+              );
+            }
+            break;
+          case 'Trigger':
+            final audioPath = object.properties
+                .getValue<String>('Audio')
+                ?.split('audio/')
+                .last;
+
+            if (audioPath != null) {
+              await FlameAudio.audioCache.load(audioPath);
+              _loadedAudio.add(audioPath);
+              final audioHitbox = RectangleHitbox(
+                collisionType: CollisionType.passive,
+              );
+
+              final audioTrigger = PositionComponent(
+                position: object.position,
+                size: object.size,
+                children: [audioHitbox],
+              );
+
+              audioHitbox.onCollisionStartCallback =
+                  (intersectionPoints, other) => _onAudioTriggerEnter(
+                        audioTrigger,
+                        other,
+                        audioPath,
+                      );
+
+              await add(audioTrigger);
+            }
+
+            break;
+        }
+      }
+    }
+  }
+
   void _onPortalEnter(PositionComponent other) {
     if (other.parent is Player) {
       game.changeLevel(levelId);
     }
+  }
+
+  void _onAudioTriggerEnter(
+    PositionComponent audioTrigger,
+    PositionComponent other,
+    String filename,
+  ) {
+    if (other.parent is Player) {
+      audioTrigger.removeFromParent();
+      FlameAudio.playLongAudio(filename);
+    }
+  }
+
+  @override
+  void onRemove() {
+    // for (final audio in _loadedAudio) {
+    //   FlameAudio.audioCache.clear(audio);
+    // }
   }
 }

@@ -19,6 +19,7 @@ class Player extends PositionComponent
 
   bool jump = false;
   bool _isOnGround = false;
+  bool moveLock = false;
 
   final _gravity = 10 * 60.0;
   final _moveSpeed = 100.0;
@@ -167,12 +168,15 @@ class Player extends PositionComponent
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     hAxisValue = 0;
     vAxisValue = 0;
-    hAxisValue += keysPressed.contains(LogicalKeyboardKey.keyA) ? -1 : 0;
-    hAxisValue += keysPressed.contains(LogicalKeyboardKey.keyD) ? 1 : 0;
 
-    if (keysPressed.contains(LogicalKeyboardKey.space)) {
-      if (_isOnGround) {
-        jump = true;
+    if (!moveLock) {
+      hAxisValue += keysPressed.contains(LogicalKeyboardKey.keyA) ? -1 : 0;
+      hAxisValue += keysPressed.contains(LogicalKeyboardKey.keyD) ? 1 : 0;
+
+      if (keysPressed.contains(LogicalKeyboardKey.space)) {
+        if (_isOnGround) {
+          jump = true;
+        }
       }
     }
     return true;

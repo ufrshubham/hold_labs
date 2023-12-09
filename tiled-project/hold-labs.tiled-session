@@ -38,6 +38,7 @@
         "Bricks.tsx"
     ],
     "project": "hold-labs.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "Bricks.tsx",
         "Level1.tmx",
