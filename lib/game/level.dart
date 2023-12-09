@@ -38,6 +38,10 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
           case 'Start':
           case 'End':
             final portal = SpriteAnimationComponent.fromFrameData(
+              position: object.position - Vector2(0, 3),
+              anchor: Anchor.topCenter,
+              scale: Vector2.all(1.2),
+              priority: 2,
               game.images.fromCache('PortalPad.png'),
               SpriteAnimationData.sequenced(
                 amount: 3,

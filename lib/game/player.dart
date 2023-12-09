@@ -112,6 +112,10 @@ class Player extends PositionComponent
       if (_velocity.x.sign != scale.x.sign) {
         flipHorizontallyAroundCenter();
       }
+
+      if (!_isOnGround) {
+        _body.current = PlayerAnimation.jump;
+      }
     } else {
       if (_isOnGround) {
         _body.current = PlayerAnimation.idle;
