@@ -1,0 +1,51 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Level1.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "Bricks.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 8,
+            "scaleInEditor": 23
+        },
+        "Level1.tmx": {
+            "scale": 2,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 231.5,
+                "y": 289.5
+            }
+        },
+        "Tiles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 2,
+            "scaleInEditor": 4
+        }
+    },
+    "last.exportedFilePath": "C:/Users/DevKage/Development/Flutter/FlameGames/hold_labs/assets/tiles",
+    "last.imagePath": "C:/Users/DevKage/Development/Flutter/FlameGames/hold_labs/assets/images",
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "Level1.tmx",
+        "Bricks.tsx"
+    ],
+    "project": "hold-labs.tiled-project",
+    "recentFiles": [
+        "Bricks.tsx",
+        "Level1.tmx",
+        "Tiles.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

@@ -4,9 +4,9 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hold_labs/game/player.dart';
+import 'package:hold_labs/game/level.dart';
 
-class HoldLabsGame extends FlameGame {
+class HoldLabsGame extends FlameGame with HasCollisionDetection {
   HoldLabsGame()
       : super(
           camera: CameraComponent.withFixedResolution(width: 320, height: 180),
@@ -23,7 +23,12 @@ class HoldLabsGame extends FlameGame {
       await add(FpsTextComponent());
     }
 
-    await images.loadAll(['Player.png']);
-    await world.add(Player());
+    await images.loadAll(
+      [
+        'Player.png',
+        'Tiles.png',
+      ],
+    );
+    await world.add(Level());
   }
 }

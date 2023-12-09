@@ -1,13 +1,15 @@
 import 'dart:async';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:hold_labs/game/game.dart';
 
 enum PlayerAnimation { idle, run, jump, hit }
 
-class Player extends PositionComponent with HasGameReference<HoldLabsGame> {
-  Player({super.position});
+class Player extends PositionComponent
+    with HasGameReference<HoldLabsGame>, CollisionCallbacks {
+  Player({super.position}) : super(anchor: Anchor.center);
 
   late final SpriteAnimationGroupComponent<PlayerAnimation> _body;
 
@@ -40,5 +42,14 @@ class Player extends PositionComponent with HasGameReference<HoldLabsGame> {
     await add(_body);
 
     size.setFrom(_body.size);
+
+    await add(
+      CircleHitbox.relative(
+        0.8,
+        parentSize: size,
+        position: Vector2(size.x * 0.55, size.y * 0.6),
+        anchor: Anchor.center,
+      ),
+    );
   }
 }
