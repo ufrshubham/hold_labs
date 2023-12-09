@@ -1,3 +1,3 @@
 # Hold Labs
 
-A game about temprature science
+A game about temperature science
