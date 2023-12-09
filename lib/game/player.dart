@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/services.dart';
 import 'package:hold_labs/game/game.dart';
@@ -11,7 +12,7 @@ enum PlayerAnimation { idle, run, jump, hit }
 
 class Player extends PositionComponent
     with HasGameReference<HoldLabsGame>, CollisionCallbacks, KeyboardHandler {
-  Player({super.position}) : super(anchor: Anchor.center);
+  Player({super.position, super.priority}) : super(anchor: Anchor.center);
 
   late final SpriteAnimationGroupComponent<PlayerAnimation> _body;
   late final CircleHitbox _circleHitbox;
@@ -59,7 +60,13 @@ class Player extends PositionComponent
     _body = SpriteAnimationGroupComponent<PlayerAnimation>(
       animations: animations,
       current: PlayerAnimation.jump,
+      children: [
+        OpacityEffect.fadeIn(
+          LinearEffectController(4),
+        ),
+      ],
     );
+    _body.opacity = 0;
     await add(_body);
 
     size.setFrom(_body.size);

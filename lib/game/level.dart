@@ -1,13 +1,8 @@
 import 'dart:async';
-import 'dart:math';
-import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:flame/effects.dart';
 import 'package:flame/experimental.dart';
-import 'package:flame/palette.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flutter/material.dart';
 import 'package:hold_labs/game/game.dart';
 import 'package:hold_labs/game/platform.dart';
 import 'package:hold_labs/game/player.dart';
@@ -38,16 +33,11 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
     final objects = spawnPointsLayer?.objects;
 
     if (objects != null) {
-      final portalPaint = Paint()..color = Colors.red;
-      portalPaint.blendMode = BlendMode.difference;
       for (final object in objects) {
         switch (object.class_) {
           case 'Start':
           case 'End':
             final portal = SpriteAnimationComponent.fromFrameData(
-              position: object.position - Vector2(0, 3),
-              scale: Vector2.all(1.2),
-              paint: portalPaint,
               game.images.fromCache('PortalPad.png'),
               SpriteAnimationData.sequenced(
                 amount: 3,
@@ -58,7 +48,7 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
             await add(portal);
 
             if (object.class_ == 'Start') {
-              final player = Player(position: object.position);
+              final player = Player(position: object.position, priority: 1);
               await add(player);
               game.camera.follow(player.cameraTarget);
             }
