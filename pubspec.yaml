@@ -30,8 +30,8 @@ flutter_icons:
   image_path: "branding/HoldLabs-Logo.png"
   windows:
     generate: true
-  # web:
-  #   generate: true
+  web:
+    generate: true
   #linux: true
   #android: true
   #ios: true

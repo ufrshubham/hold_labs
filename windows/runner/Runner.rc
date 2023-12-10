@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.nobs" "\0"
-            VALUE "FileDescription", "hold_labs" "\0"
+            VALUE "FileDescription", "HOLD-Labs" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "hold_labs" "\0"
+            VALUE "InternalName", "HOLD-Labs" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.nobs. All rights reserved." "\0"
-            VALUE "OriginalFilename", "hold_labs.exe" "\0"
-            VALUE "ProductName", "hold_labs" "\0"
+            VALUE "OriginalFilename", "HOLD-Labs.exe" "\0"
+            VALUE "ProductName", "HOLD-Labs" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
