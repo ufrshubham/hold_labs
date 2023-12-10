@@ -19,7 +19,11 @@ enum GunType { hot, cold }
 
 class Player extends PositionComponent
     with HasGameReference<HoldLabsGame>, CollisionCallbacks, KeyboardHandler {
-  Player({super.position, super.priority}) : super(anchor: Anchor.center);
+  Player({
+    super.position,
+    super.priority,
+    this.hasGun = false,
+  }) : super(anchor: Anchor.center);
 
   late final SpriteAnimationGroupComponent<PlayerAnimation> _body;
   late final CircleHitbox _circleHitbox;
@@ -121,6 +125,10 @@ class Player extends PositionComponent
         ),
       },
     );
+
+    if (hasGun) {
+      await _addGuns();
+    }
   }
 
   @override
@@ -232,8 +240,8 @@ class Player extends PositionComponent
     return true;
   }
 
-  void _addGuns() {
-    _gunHolder.add(_gunComponent);
+  Future<void> _addGuns() async {
+    await _gunHolder.add(_gunComponent);
   }
 
   void _updateGunPosition() {

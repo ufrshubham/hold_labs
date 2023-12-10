@@ -24,7 +24,11 @@ class GunPickup extends PositionComponent with HasGameReference<HoldLabsGame> {
 
     await add(_guns);
     await add(
-      RectangleHitbox(collisionType: CollisionType.passive),
+      RectangleHitbox.relative(
+        Vector2(0.5, 0.5),
+        parentSize: size,
+        collisionType: CollisionType.passive,
+      ),
     );
   }
 }

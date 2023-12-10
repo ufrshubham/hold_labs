@@ -67,7 +67,11 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
             await add(portal);
 
             if (object.class_ == 'Start') {
-              player = Player(position: object.position, priority: 1);
+              player = Player(
+                position: object.position,
+                priority: 1,
+                hasGun: levelId > 4,
+              );
               await add(player);
               game.camera.follow(player.cameraTarget);
             } else {
