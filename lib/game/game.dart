@@ -40,12 +40,12 @@ class HoldLabsGame extends FlameGame
 
     FlameAudio.bgm.initialize();
     await FlameAudio.bgm.play('HoldLabs-Music.mp3', volume: 0.8);
-    changeLevel(1);
+    changeLevel(3);
   }
 
   void changeLevel(int levelId) {
     currentLevel?.removeFromParent();
-    currentLevel = Level(min(levelId, 2));
+    currentLevel = Level(min(levelId, 1));
     world.add(currentLevel!);
   }
 }

@@ -94,6 +94,7 @@ class HObject extends PositionComponent with HasPaint, Snapshot {
     if (isCooling) {
       _temperatureFactor -= _temperatureChangeRate * dt;
       _updateTemperature();
+      position.y = lerpDouble(_coldHeight.y, _hotHeight.y, _temperatureFactor)!;
     }
 
     if (isHeating) {

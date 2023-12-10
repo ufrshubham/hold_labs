@@ -102,6 +102,26 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
 
             break;
           case 'ColdButton':
+            final blasterId = object.properties.getValue<int>('Blaster');
+
+            if (blasterId != null) {
+              final blasterObject = map.tileMap.map.objectById(blasterId);
+              final targetId =
+                  blasterObject?.properties.getValue<int>('Target');
+
+              if (targetId != null) {
+                final targetObject = map.tileMap.map.objectById(targetId);
+
+                if (targetObject != null) {
+                  final hotButton = ColdButton(
+                    blasterStart: blasterObject!.position,
+                    blasterEnd: targetObject.position,
+                    position: object.position,
+                  );
+                  await add(hotButton);
+                }
+              }
+            }
             break;
         }
       }
