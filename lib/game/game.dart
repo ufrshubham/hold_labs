@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
-import 'package:flame/input.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -39,13 +39,20 @@ class HoldLabsGame extends FlameGame
     );
 
     FlameAudio.bgm.initialize();
+    await FlameAudio.audioCache.loadAll(
+      [
+        'Laser.mp3',
+        'Jump.mp3',
+        'Button.mp3',
+      ],
+    );
     await FlameAudio.bgm.play('HoldLabs-Music.mp3', volume: 0.8);
-    changeLevel(3);
+    changeLevel(1);
   }
 
   void changeLevel(int levelId) {
     currentLevel?.removeFromParent();
-    currentLevel = Level(min(levelId, 1));
+    currentLevel = Level(min(levelId, 3));
     world.add(currentLevel!);
   }
 }

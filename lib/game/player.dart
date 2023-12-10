@@ -4,6 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/sprite.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
 import 'package:hold_labs/game/game.dart';
 import 'package:hold_labs/game/h_object.dart';
@@ -108,6 +109,7 @@ class Player extends PositionComponent
       if (_isOnGround) {
         _velocity.y = -_jumpSpeed;
         _isOnGround = false;
+        FlameAudio.play('Jump.mp3');
       }
       jump = false;
     }

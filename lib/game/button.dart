@@ -5,6 +5,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 import 'package:flame/palette.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:hold_labs/game/game.dart';
 import 'package:hold_labs/game/h_object.dart';
 import 'package:hold_labs/game/player.dart';
@@ -20,6 +21,7 @@ class HotButton extends PositionComponent
   final Vector2 blasterStart;
   final Vector2 blasterEnd;
 
+  late final RectangleHitbox _hitbox;
   late final SpriteAnimationComponent _internalButton;
   late final _ray = Ray2(
     origin: blasterStart,
@@ -49,7 +51,7 @@ class HotButton extends PositionComponent
 
     await add(_internalButton);
     await add(
-      RectangleHitbox.relative(
+      _hitbox = RectangleHitbox.relative(
         Vector2(1, 0.5),
         position: Vector2(0, size.y * 0.5),
         parentSize: size,
@@ -66,6 +68,9 @@ class HotButton extends PositionComponent
     super.onCollisionStart(intersectionPoints, other);
 
     if (other is Player) {
+      _hitbox.collisionType = CollisionType.inactive;
+      FlameAudio.play('Button.mp3');
+
       _isActive = true;
       _internalButton.playing = true;
       parent?.add(
@@ -79,6 +84,8 @@ class HotButton extends PositionComponent
           paint: _blasterPaint,
         ),
       );
+
+      FlameAudio.play('Laser.mp3');
     }
   }
 
@@ -112,6 +119,7 @@ class ColdButton extends PositionComponent
   final Vector2 blasterStart;
   final Vector2 blasterEnd;
 
+  late final RectangleHitbox _hitbox;
   late final SpriteAnimationComponent _internalButton;
   late final _ray = Ray2(
     origin: blasterStart,
@@ -140,7 +148,7 @@ class ColdButton extends PositionComponent
 
     await add(_internalButton);
     await add(
-      RectangleHitbox.relative(
+      _hitbox = RectangleHitbox.relative(
         Vector2(1, 0.5),
         position: Vector2(0, size.y * 0.5),
         parentSize: size,
@@ -157,6 +165,9 @@ class ColdButton extends PositionComponent
     super.onCollisionStart(intersectionPoints, other);
 
     if (other is Player) {
+      _hitbox.collisionType = CollisionType.inactive;
+      FlameAudio.play('Button.mp3');
+
       _isActive = true;
       _internalButton.playing = true;
       parent?.add(
@@ -170,6 +181,8 @@ class ColdButton extends PositionComponent
           paint: _blasterPaint,
         ),
       );
+
+      FlameAudio.play('Laser.mp3');
     }
   }
 
