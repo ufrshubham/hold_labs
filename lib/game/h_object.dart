@@ -112,6 +112,11 @@ class HObject extends PositionComponent with HasPaint, Snapshot {
     _paint.color = _tempColor;
 
     _internalObject.timeScale = _temperatureFactor;
+    if (_temperatureFactor == 0.0) {
+      for (final hAtom in _internalObject.children.query<_HAtom>()) {
+        hAtom.reset();
+      }
+    }
     renderSnapshot = _timer.timer.finished && _temperatureFactor == 0.0;
   }
 }
@@ -120,4 +125,21 @@ class _HObjectInternal extends PositionComponent with HasTimeScale {}
 
 class _HAtom extends CircleComponent {
   _HAtom({super.position, super.radius, super.paint, super.children});
+
+  final _initialPosition = Vector2.zero();
+  late final MoveEffect _moveEffect;
+
+  @override
+  Future<void> onLoad() async {
+    super.onLoad();
+    _initialPosition.setFrom(position);
+    _moveEffect = children.first as MoveByEffect;
+  }
+
+  void reset() {
+    if (isMounted) {
+      position.setFrom(_initialPosition);
+      _moveEffect.reset();
+    }
+  }
 }
