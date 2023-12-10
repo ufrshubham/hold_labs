@@ -406,12 +406,13 @@ packages:
     source: hosted
     version: "0.6.1"
   tiled:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: tiled
-      sha256: "1e277695ea25f387f66fb09104a4ce0f4f25e9b15239d541ffbdc3288ae1e087"
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/tiled"
+      ref: HEAD
+      resolved-ref: "4faf43b45002e19c8fdbf2af8dd09969bcf4781c"
+      url: "https://github.com/flame-engine/tiled.dart"
+    source: git
     version: "0.10.1"
   typed_data:
     dependency: transitive

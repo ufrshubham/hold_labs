@@ -32,9 +32,10 @@ class HoldLabsGame extends FlameGame
         'Player.png',
         'Tiles.png',
         'PortalPad.png',
+        'Buttons.png',
       ],
     );
-    changeLevel(1);
+    changeLevel(2);
   }
 
   void changeLevel(int levelId) {

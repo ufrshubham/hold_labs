@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/palette.dart';
@@ -10,26 +11,37 @@ class HObject extends PositionComponent with HasPaint, Snapshot {
   HObject({
     super.position,
     super.size,
-    this.temperatureFactor = 0.0,
-    this.temperatureChangeRate = 1.0,
-  });
+    double? temperatureFactor,
+    double? temperatureChangeRate,
+    double? atomicSize,
+    Vector2? hotHeight,
+    Vector2? coldHeight,
+  })  : _temperatureFactor = temperatureFactor ?? 0.0,
+        _temperatureChangeRate = temperatureChangeRate ?? 1.0,
+        _atomicSize = atomicSize ?? 5.0,
+        _hotHeight = hotHeight?.clone() ?? position?.clone() ?? Vector2.zero(),
+        _coldHeight =
+            coldHeight?.clone() ?? position?.clone() ?? Vector2.zero();
 
-  static const _atomicSize = 10.0;
-  static const _atomicRadius = _atomicSize * 0.6;
+  late final _atomicRadius = _atomicSize * 0.6;
   static final _random = Random();
 
-  double temperatureFactor;
-  double temperatureChangeRate;
+  double _temperatureFactor;
+  final double _temperatureChangeRate;
+  final double _atomicSize;
   bool isHeating = false;
   bool isCooling = false;
 
   late final _paint = Paint()..color = _tempColor;
   final _internalObject = _HObjectInternal();
 
+  final Vector2 _hotHeight;
+  final Vector2 _coldHeight;
+
   Color get _tempColor => Color.lerp(
         BasicPalette.blue.color,
         BasicPalette.red.color,
-        temperatureFactor,
+        _temperatureFactor,
       )!;
 
   late final _timer = TimerComponent(
@@ -43,8 +55,8 @@ class HObject extends PositionComponent with HasPaint, Snapshot {
 
   @override
   Future<void> onLoad() async {
-    final nRow = size.y / _atomicSize;
-    final nCol = size.x / _atomicSize;
+    final nRow = (size.y / _atomicSize).floor();
+    final nCol = (size.x / _atomicSize).floor();
 
     for (var i = 0; i < nRow; ++i) {
       for (var j = 0; j < nCol; ++j) {
@@ -73,28 +85,31 @@ class HObject extends PositionComponent with HasPaint, Snapshot {
 
     await add(_internalObject);
     await add(_timer);
+    await add(RectangleHitbox(collisionType: CollisionType.passive));
     _updateTemperature();
   }
 
   @override
   void update(double dt) {
     if (isCooling) {
-      temperatureFactor -= temperatureChangeRate * dt;
+      _temperatureFactor -= _temperatureChangeRate * dt;
       _updateTemperature();
     }
 
     if (isHeating) {
-      temperatureFactor += temperatureChangeRate * dt;
+      _temperatureFactor += _temperatureChangeRate * dt;
       _updateTemperature();
+
+      position.y = lerpDouble(_coldHeight.y, _hotHeight.y, _temperatureFactor)!;
     }
   }
 
   void _updateTemperature() {
-    temperatureFactor = temperatureFactor.clamp(0, 1);
+    _temperatureFactor = _temperatureFactor.clamp(0, 1);
     _paint.color = _tempColor;
 
-    _internalObject.timeScale = temperatureFactor;
-    renderSnapshot = _timer.timer.finished && temperatureFactor == 0.0;
+    _internalObject.timeScale = _temperatureFactor;
+    renderSnapshot = _timer.timer.finished && _temperatureFactor == 0.0;
   }
 }
 

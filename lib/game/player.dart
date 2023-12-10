@@ -6,6 +6,7 @@ import 'package:flame/effects.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/services.dart';
 import 'package:hold_labs/game/game.dart';
+import 'package:hold_labs/game/h_object.dart';
 import 'package:hold_labs/game/platform.dart';
 
 enum PlayerAnimation { idle, run, jump, hit }
@@ -63,7 +64,7 @@ class Player extends PositionComponent
       current: PlayerAnimation.jump,
       children: [
         OpacityEffect.fadeIn(
-          LinearEffectController(4),
+          LinearEffectController(1),
         ),
       ],
     );
@@ -132,7 +133,7 @@ class Player extends PositionComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (other is Platform) {
+    if (other is Platform || other is HObject) {
       if (intersectionPoints.length == 2) {
         final midPoint = (intersectionPoints.elementAt(0) +
                 intersectionPoints.elementAt(1)) *

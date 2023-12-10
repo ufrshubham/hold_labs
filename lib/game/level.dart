@@ -5,7 +5,9 @@ import 'package:flame/components.dart';
 import 'package:flame/experimental.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:hold_labs/game/button.dart';
 import 'package:hold_labs/game/game.dart';
+import 'package:hold_labs/game/h_object.dart';
 import 'package:hold_labs/game/platform.dart';
 import 'package:hold_labs/game/player.dart';
 import 'package:hold_labs/game/tiled_object_ext.dart';
@@ -76,6 +78,31 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
               await portal.add(portalHitbox);
             }
             break;
+          case 'HotButton':
+            final blasterId = object.properties.getValue<int>('Blaster');
+
+            if (blasterId != null) {
+              final blasterObject = map.tileMap.map.objectById(blasterId);
+              final targetId =
+                  blasterObject?.properties.getValue<int>('Target');
+
+              if (targetId != null) {
+                final targetObject = map.tileMap.map.objectById(targetId);
+
+                if (targetObject != null) {
+                  final hotButton = HotButton(
+                    blasterStart: blasterObject!.position,
+                    blasterEnd: targetObject.position,
+                    position: object.position,
+                  );
+                  await add(hotButton);
+                }
+              }
+            }
+
+            break;
+          case 'ColdButton':
+            break;
         }
       }
     }
@@ -95,6 +122,35 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
             );
             await add(portal);
             break;
+          case 'HObject':
+            final hotHeightId = object.properties.getValue<int>('HotHeight');
+            final coldHeightId = object.properties.getValue<int>('ColdHeight');
+
+            Vector2? hotHeight;
+            Vector2? coldHeight;
+
+            if (hotHeightId != null) {
+              hotHeight = map.tileMap.map.objectById(hotHeightId)?.position;
+            }
+            if (coldHeightId != null) {
+              coldHeight = map.tileMap.map.objectById(coldHeightId)?.position;
+            }
+
+            final hObject = HObject(
+              position: object.position,
+              size: object.size,
+              temperatureFactor: object.properties.getValue<double>(
+                'TemperatureFactor',
+              ),
+              temperatureChangeRate: object.properties.getValue<double>(
+                'TemperatureChangeRate',
+              ),
+              atomicSize: object.properties.getValue<double>('AtomicSize'),
+              hotHeight: hotHeight,
+              coldHeight: coldHeight,
+            );
+            await add(hObject);
+            break;
         }
       }
     }
@@ -103,8 +159,9 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
   Future<void> _handleAudio(TiledComponent map) async {
     final audioLayer = map.tileMap.getLayer<ObjectGroup>('AudioTriggers');
     final objects = audioLayer?.objects;
+    final visible = audioLayer?.visible ?? false;
 
-    if (objects != null) {
+    if (visible && objects != null) {
       for (final object in objects) {
         switch (object.class_) {
           case 'AutoStart':
@@ -132,6 +189,8 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
                 ?.split('audio/')
                 .last;
 
+            final holdInput = object.properties.getValue<bool>('HoldInput');
+
             if (audioPath != null) {
               await FlameAudio.audioCache.load(audioPath);
               _loadedAudio.add(audioPath);
@@ -150,6 +209,7 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
                         audioTrigger,
                         other,
                         audioPath,
+                        holdInput ?? false,
                       );
 
               await add(audioTrigger);
@@ -163,18 +223,29 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
 
   void _onPortalEnter(PositionComponent other) {
     if (other.parent is Player) {
-      game.changeLevel(levelId);
+      game.changeLevel(levelId + 1);
     }
   }
 
-  void _onAudioTriggerEnter(
+  Future<void> _onAudioTriggerEnter(
     PositionComponent audioTrigger,
     PositionComponent other,
     String filename,
-  ) {
+    bool holdInput,
+  ) async {
     if (other.parent is Player) {
       audioTrigger.removeFromParent();
-      FlameAudio.playLongAudio(filename);
+
+      if (holdInput) {
+        _player.moveLock = true;
+      }
+
+      final audioplayer = await FlameAudio.playLongAudio(filename);
+      if (holdInput) {
+        audioplayer.onPlayerComplete.listen((event) {
+          _player.moveLock = false;
+        });
+      }
     }
   }
 
