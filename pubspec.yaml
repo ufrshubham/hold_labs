@@ -13,14 +13,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-dependency_overrides:
-  tiled:
-    git:
-      url: https://github.com/flame-engine/tiled.dart
-      path: packages/tiled
-
 dev_dependencies:
   flame_lint: 1.1.2
+  flutter_launcher_icons: 0.13.1
   flutter_test:
     sdk: flutter
 
@@ -30,3 +25,14 @@ flutter:
     - assets/images/
     - assets/tiles/
     - assets/audio/
+
+flutter_icons:
+  image_path: "branding/HoldLabs-Logo.png"
+  windows:
+    generate: true
+  # web:
+  #   generate: true
+  #linux: true
+  #android: true
+  #ios: true
+  #macos: true
