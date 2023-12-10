@@ -71,11 +71,11 @@
                 4,
                 3
             ],
-            "scale": 1,
+            "scale": 8,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 343,
-                "y": 486
+                "x": 1053.25,
+                "y": 528.5
             }
         },
         "Level7.tmx": {
@@ -84,16 +84,16 @@
                 4,
                 3
             ],
-            "scale": 1.5,
+            "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 249.99999999999997,
-                "y": 210
+                "x": 429,
+                "y": 181
             }
         },
         "Tiles.tsx": {
             "dynamicWrapping": true,
-            "scaleInDock": 4,
+            "scaleInDock": 5.5,
             "scaleInEditor": 2
         }
     },
@@ -112,11 +112,13 @@
     "project": "hold-labs.tiled-project",
     "property.type": "file",
     "recentFiles": [
-        "Tiles.tsx",
-        "Level2.tmx",
+        "Level7.tmx",
+        "Level5.tmx",
         "Level4.tmx",
-        "Level1.tmx",
         "Level3.tmx",
+        "Level2.tmx",
+        "Level1.tmx",
+        "Tiles.tsx",
         "Bricks.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",

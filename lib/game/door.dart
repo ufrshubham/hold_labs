@@ -6,9 +6,10 @@ import 'package:hold_labs/game/game.dart';
 
 class Door extends PositionComponent
     with HasGameReference<HoldLabsGame>, CollisionCallbacks {
-  Door({super.position});
+  Door({super.position, this.exitDoor = false});
 
   late final SpriteComponent _internalDoor;
+  final bool exitDoor;
 
   @override
   Future<void> onLoad() async {
@@ -30,7 +31,11 @@ class Door extends PositionComponent
     Set<Vector2> intersectionPoints,
     PositionComponent other,
   ) {
+    if (!exitDoor) {
+      game.changeLevel(7);
+    } else {
+      game.exit();
+    }
     super.onCollisionStart(intersectionPoints, other);
-    game.changeLevel(7);
   }
 }

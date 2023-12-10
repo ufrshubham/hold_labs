@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
@@ -64,7 +65,7 @@ class HoldLabsGame extends FlameGame
       ],
     );
     await FlameAudio.bgm.play('HoldLabs-Music.mp3', volume: 0.8);
-    changeLevel(7);
+    changeLevel(5);
   }
 
   void changeLevel(int levelId) {
@@ -141,5 +142,21 @@ class HoldLabsGame extends FlameGame
         }
       }
     }
+  }
+
+  void exit() {
+    final fader = RectangleComponent(
+      size: size,
+      paint: Paint()..color = Colors.black,
+      children: [
+        OpacityEffect.fadeIn(
+          LinearEffectController(4),
+          onComplete: () => world.removeAll(world.children),
+        ),
+      ],
+    );
+    fader.opacity = 0;
+
+    camera.viewport.add(fader);
   }
 }

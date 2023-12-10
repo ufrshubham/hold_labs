@@ -137,6 +137,10 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
             final door = Door(position: object.position);
             await add(door);
             break;
+          case 'ExitDoor':
+            final door = Door(position: object.position, exitDoor: true);
+            await add(door);
+            break;
           case 'Hostage':
             final hostage = SpriteAnimationComponent.fromFrameData(
               position: object.position,
