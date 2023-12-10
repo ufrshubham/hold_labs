@@ -94,7 +94,7 @@
    </properties>
    <point/>
   </object>
-  <object id="18" name="LevelComplete" type="Trigger" x="216" y="208" width="40" height="48">
+  <object id="18" name="Button Instructions" type="Trigger" x="208" y="208" width="48" height="48">
    <properties>
     <property name="Audio" type="file" value="../audio/Level2-ButtonTrigger.mp3"/>
     <property name="HoldInput" type="bool" value="true"/>

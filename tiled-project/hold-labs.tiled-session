@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Level1.tmx",
+    "activeFile": "Level2.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -15,14 +15,14 @@
         },
         "Level1.tmx": {
             "expandedObjectLayers": [
-                4,
-                2
+                2,
+                4
             ],
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 265.5,
-                "y": 100
+                "x": 264.5,
+                "y": 99
             }
         },
         "Level2.tmx": {
@@ -31,16 +31,16 @@
                 4,
                 2
             ],
-            "scale": 4,
-            "selectedLayer": 2,
+            "scale": 0.75,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 273.125,
-                "y": 230.5
+                "x": 372.6666666666667,
+                "y": 277.33333333333337
             }
         },
         "Tiles.tsx": {
             "dynamicWrapping": true,
-            "scaleInDock": 2,
+            "scaleInDock": 4,
             "scaleInEditor": 4
         }
     },
@@ -54,14 +54,14 @@
     "map.width": 50,
     "openFiles": [
         "Level1.tmx",
-        "Bricks.tsx"
+        "Level2.tmx"
     ],
     "project": "hold-labs.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "Level1.tmx",
         "Level2.tmx",
         "Tiles.tsx",
-        "Level1.tmx",
         "Bricks.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",

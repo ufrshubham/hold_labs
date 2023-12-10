@@ -170,6 +170,7 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
                 ?.split('audio/')
                 .last;
             if (audioPath != null) {
+              FlameAudio.bgm.pause();
               _player.moveLock = true;
 
               await FlameAudio.audioCache.load(audioPath);
@@ -179,6 +180,7 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
               audioplayer.onPlayerComplete.listen(
                 (event) {
                   _player.moveLock = false;
+                  FlameAudio.bgm.resume();
                 },
               );
             }
@@ -237,15 +239,15 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
       audioTrigger.removeFromParent();
 
       if (holdInput) {
+        FlameAudio.bgm.pause();
         _player.moveLock = true;
       }
 
       final audioplayer = await FlameAudio.playLongAudio(filename);
-      if (holdInput) {
-        audioplayer.onPlayerComplete.listen((event) {
-          _player.moveLock = false;
-        });
-      }
+      audioplayer.onPlayerComplete.listen((event) {
+        _player.moveLock = false;
+        FlameAudio.bgm.resume();
+      });
     }
   }
 

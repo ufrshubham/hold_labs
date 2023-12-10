@@ -20,7 +20,13 @@ class Player extends PositionComponent
 
   bool jump = false;
   bool _isOnGround = false;
-  bool moveLock = false;
+  bool _moveLock = false;
+  set moveLock(bool value) {
+    _moveLock = value;
+    if (_moveLock) {
+      hAxisValue = 0;
+    }
+  }
 
   final _gravity = 10 * 60.0;
   final _moveSpeed = 100.0;
@@ -170,7 +176,7 @@ class Player extends PositionComponent
     hAxisValue = 0;
     vAxisValue = 0;
 
-    if (!moveLock) {
+    if (!_moveLock) {
       hAxisValue += keysPressed.contains(LogicalKeyboardKey.keyA) ? -1 : 0;
       hAxisValue += keysPressed.contains(LogicalKeyboardKey.keyD) ? 1 : 0;
 
