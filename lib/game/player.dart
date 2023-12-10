@@ -250,8 +250,12 @@ class Player extends PositionComponent
           direction: dir,
         );
 
-        results = game.collisionDetection
-            .raycast(ray, maxDistance: maxDistance, out: results);
+        results = game.collisionDetection.raycast(
+          ray,
+          maxDistance: maxDistance,
+          out: results,
+          ignoreHitboxes: [_circleHitbox],
+        );
         if (results?.isActive ?? false) {
           final other = results!.hitbox?.parent;
           if (other is HObject) {

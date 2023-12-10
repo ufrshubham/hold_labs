@@ -32,10 +32,10 @@
                 3
             ],
             "scale": 1,
-            "selectedLayer": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 361,
-                "y": 293
+                "x": 305.5,
+                "y": 197
             }
         },
         "Level3.tmx": {
@@ -44,11 +44,19 @@
                 4,
                 3
             ],
-            "scale": 3,
-            "selectedLayer": 1,
+            "scale": 0.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 237.66666666666669,
-                "y": 385.66666666666663
+                "x": 369,
+                "y": 44
+            }
+        },
+        "Level4.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 586.3636363636363,
+                "y": 193.939393939394
             }
         },
         "Tiles.tsx": {
