@@ -6,6 +6,7 @@ import 'package:flame/experimental.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:hold_labs/game/button.dart';
+import 'package:hold_labs/game/door.dart';
 import 'package:hold_labs/game/game.dart';
 import 'package:hold_labs/game/gun_pickup.dart';
 import 'package:hold_labs/game/h_object.dart';
@@ -131,6 +132,22 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
           case 'Guns':
             final gunsPickup = GunPickup(position: object.position);
             await add(gunsPickup);
+            break;
+          case 'Door':
+            final door = Door(position: object.position);
+            await add(door);
+            break;
+          case 'Hostage':
+            final hostage = SpriteAnimationComponent.fromFrameData(
+              position: object.position,
+              game.images.fromCache('Player.png'),
+              SpriteAnimationData.sequenced(
+                amount: 4,
+                stepTime: 0.1,
+                textureSize: Vector2.all(16),
+              ),
+            );
+            await add(hostage);
             break;
         }
       }

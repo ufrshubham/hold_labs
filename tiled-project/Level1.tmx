@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="22">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="23">
  <editorsettings>
   <export target="../assets/tiles/Level1.tmx" format="tmx"/>
  </editorsettings>
@@ -26,8 +26,8 @@
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
 1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-1,1,1,0,0,0,0,0,1,1,0,0,1,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-1,1,1,0,0,0,0,0,1,1,0,0,1,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+1,1,1,0,0,0,0,0,1,1,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+1,1,1,0,0,0,0,0,1,1,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
@@ -41,7 +41,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="3" name="Colliders" locked="1">
+ <objectgroup id="3" name="Colliders">
   <object id="5" type="Platform" x="0" y="0" width="560" height="48"/>
   <object id="6" type="Platform" x="0" y="352" width="496" height="48"/>
   <object id="7" type="Platform" x="496" y="48" width="64" height="352"/>
@@ -52,6 +52,7 @@
   <object id="19" type="Platform" x="256" y="288" width="48" height="64"/>
   <object id="20" type="Platform" x="192" y="304" width="32" height="48"/>
   <object id="21" type="Platform" x="128" y="320" width="32" height="32"/>
+  <object id="22" type="Platform" x="224" y="320" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="4" name="AudioTriggers">
   <object id="17" name="Intro" type="AutoStart" x="64" y="64">

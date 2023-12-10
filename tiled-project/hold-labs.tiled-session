@@ -16,13 +16,14 @@
         "Level1.tmx": {
             "expandedObjectLayers": [
                 2,
-                4
+                4,
+                3
             ],
-            "scale": 1,
-            "selectedLayer": 1,
+            "scale": 1.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 290,
-                "y": 98
+                "x": 324.66666666666663,
+                "y": 190
             }
         },
         "Level2.tmx": {
@@ -31,11 +32,11 @@
                 4,
                 3
             ],
-            "scale": 2,
-            "selectedLayer": 3,
+            "scale": 0.75,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 268.25,
-                "y": 220
+                "x": 585.3333333333333,
+                "y": 241.33333333333337
             }
         },
         "Level3.tmx": {
@@ -44,11 +45,11 @@
                 4,
                 3
             ],
-            "scale": 0.5,
-            "selectedLayer": 2,
+            "scale": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 369,
-                "y": 42
+                "x": 379.5,
+                "y": 158
             }
         },
         "Level4.tmx": {
@@ -57,17 +58,43 @@
                 4,
                 3
             ],
-            "scale": 0.75,
+            "scale": 5.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 532.6666666666667,
-                "y": 265.33333333333337
+                "x": 339.8181818181818,
+                "y": 159.27272727272728
+            }
+        },
+        "Level5.tmx": {
+            "expandedObjectLayers": [
+                2,
+                4,
+                3
+            ],
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 343,
+                "y": 486
+            }
+        },
+        "Level7.tmx": {
+            "expandedObjectLayers": [
+                2,
+                4,
+                3
+            ],
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 249.99999999999997,
+                "y": 210
             }
         },
         "Tiles.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 4,
-            "scaleInEditor": 4
+            "scaleInEditor": 2
         }
     },
     "last.exportedFilePath": "C:/Users/DevKage/Development/Flutter/FlameGames/hold_labs/assets/tiles",
@@ -85,9 +112,11 @@
     "project": "hold-labs.tiled-project",
     "property.type": "file",
     "recentFiles": [
-        "Level1.tmx",
-        "Level2.tmx",
         "Tiles.tsx",
+        "Level2.tmx",
+        "Level4.tmx",
+        "Level1.tmx",
+        "Level3.tmx",
         "Bricks.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",

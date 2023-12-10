@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="184">
+ <editorsettings>
+  <export target="../assets/tiles/Level7.tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="Tiles.tsx"/>
+ <layer id="1" name="Tiles" width="35" height="20">
+  <data encoding="csv">
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,
+2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,
+2,2,2,2,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,2,2,2,2,
+2,2,2,2,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,2,2,2,2,
+2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,
+2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,
+2,2,2,2,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,2,2,2,2,
+2,2,2,2,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,2,2,2,2,
+2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,
+2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,
+2,2,2,2,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,2,2,2,2,
+2,2,2,2,0,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,2,2,2,2,
+2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,
+2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+</data>
+ </layer>
+ <objectgroup id="2" name="SpawnPoints">
+  <object id="154" type="Hostage" x="112" y="64">
+   <point/>
+  </object>
+  <object id="155" type="Hostage" x="144" y="64">
+   <point/>
+  </object>
+  <object id="156" type="Hostage" x="176" y="64">
+   <point/>
+  </object>
+  <object id="157" type="Hostage" x="208" y="64">
+   <point/>
+  </object>
+  <object id="159" type="Hostage" x="352" y="64">
+   <point/>
+  </object>
+  <object id="160" type="Hostage" x="384" y="64">
+   <point/>
+  </object>
+  <object id="161" type="Hostage" x="416" y="64">
+   <point/>
+  </object>
+  <object id="162" type="Hostage" x="448" y="64">
+   <point/>
+  </object>
+  <object id="163" type="Hostage" x="448" y="128">
+   <point/>
+  </object>
+  <object id="164" type="Hostage" x="416" y="128">
+   <point/>
+  </object>
+  <object id="165" type="Hostage" x="384" y="128">
+   <point/>
+  </object>
+  <object id="166" type="Hostage" x="352" y="128">
+   <point/>
+  </object>
+  <object id="167" type="Hostage" x="208" y="128">
+   <point/>
+  </object>
+  <object id="168" type="Hostage" x="176" y="128">
+   <point/>
+  </object>
+  <object id="169" type="Hostage" x="144" y="128">
+   <point/>
+  </object>
+  <object id="170" type="Hostage" x="112" y="128">
+   <point/>
+  </object>
+  <object id="171" type="Hostage" x="112" y="192">
+   <point/>
+  </object>
+  <object id="172" type="Hostage" x="144" y="192">
+   <point/>
+  </object>
+  <object id="173" type="Hostage" x="176" y="192">
+   <point/>
+  </object>
+  <object id="175" type="Hostage" x="208" y="192">
+   <point/>
+  </object>
+  <object id="176" type="Hostage" x="352" y="192">
+   <point/>
+  </object>
+  <object id="177" type="Hostage" x="384" y="192">
+   <point/>
+  </object>
+  <object id="178" type="Hostage" x="416" y="192">
+   <point/>
+  </object>
+  <object id="179" type="Hostage" x="448" y="192">
+   <point/>
+  </object>
+  <object id="183" name="Start" type="Start" x="80" y="256">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="Colliders">
+  <object id="43" type="Platform" x="64" y="0" width="432" height="48"/>
+  <object id="44" type="Platform" x="0" y="0" width="64" height="320"/>
+  <object id="105" type="Platform" x="496" y="0" width="64" height="320"/>
+  <object id="138" type="Platform" x="64" y="272" width="432" height="48"/>
+  <object id="182" type="Exit Door" x="480" y="256" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="4" name="AudioTriggers">
+  <object id="181" name="Intro" type="AutoStart" x="272" y="240">
+   <properties>
+    <property name="Audio" type="file" value="../assets/audio/Level7.mp3"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+</map>

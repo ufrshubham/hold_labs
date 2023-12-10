@@ -32,10 +32,11 @@ class HoldLabsGame extends FlameGame
   final _blueGunPaint = BasicPalette.blue.paint()..strokeWidth = 4;
 
   bool isFiring = false;
+  bool otherEnding = false;
 
   @override
   Color backgroundColor() {
-    return const Color.fromARGB(255, 184, 187, 202);
+    return const Color.fromARGB(255, 122, 122, 102);
   }
 
   @override
@@ -63,12 +64,12 @@ class HoldLabsGame extends FlameGame
       ],
     );
     await FlameAudio.bgm.play('HoldLabs-Music.mp3', volume: 0.8);
-    changeLevel(4);
+    changeLevel(7);
   }
 
   void changeLevel(int levelId) {
     currentLevel?.removeFromParent();
-    currentLevel = Level(min(levelId, 4));
+    currentLevel = Level(min(levelId, 7));
     world.add(currentLevel!);
   }
 
