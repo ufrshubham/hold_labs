@@ -32,7 +32,7 @@ flutter_icons:
     generate: true
   web:
     generate: true
-  #linux: true
+  linux: true
   #android: true
   #ios: true
   #macos: true
