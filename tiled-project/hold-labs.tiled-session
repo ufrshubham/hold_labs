@@ -31,11 +31,11 @@
                 4,
                 3
             ],
-            "scale": 1,
-            "selectedLayer": 2,
+            "scale": 2,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 305.5,
-                "y": 197
+                "x": 268.25,
+                "y": 220
             }
         },
         "Level3.tmx": {
@@ -48,15 +48,19 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 369,
-                "y": 44
+                "y": 42
             }
         },
         "Level4.tmx": {
-            "scale": 0.33,
-            "selectedLayer": 2,
+            "expandedObjectLayers": [
+                2,
+                3
+            ],
+            "scale": 1.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 586.3636363636363,
-                "y": 193.939393939394
+                "x": 445.66666666666663,
+                "y": 264
             }
         },
         "Tiles.tsx": {
@@ -78,7 +82,7 @@
         "Level2.tmx"
     ],
     "project": "hold-labs.tiled-project",
-    "property.type": "bool",
+    "property.type": "file",
     "recentFiles": [
         "Level1.tmx",
         "Level2.tmx",
