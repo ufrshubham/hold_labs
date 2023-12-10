@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:hold_labs/game/game.dart';
+import 'package:hold_labs/game/player.dart';
 
 class Door extends PositionComponent
     with HasGameReference<HoldLabsGame>, CollisionCallbacks {
@@ -31,10 +32,13 @@ class Door extends PositionComponent
     Set<Vector2> intersectionPoints,
     PositionComponent other,
   ) {
-    if (!exitDoor) {
-      game.changeLevel(7);
-    } else {
-      game.exit();
+    if (other is Player) {
+      other.moveLock = true;
+      if (!exitDoor) {
+        game.changeLevel(7);
+      } else {
+        game.exit();
+      }
     }
     super.onCollisionStart(intersectionPoints, other);
   }

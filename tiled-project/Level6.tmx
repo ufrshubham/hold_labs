@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="193">
+ <editorsettings>
+  <export target="../assets/tiles/Level6.tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="Tiles.tsx"/>
+ <layer id="1" name="Tiles" width="35" height="20">
+  <data encoding="csv">
+1,6,1,6,1,6,6,6,6,6,1,6,6,1,1,1,6,1,6,1,1,1,1,1,1,6,6,6,1,6,1,6,1,1,6,
+6,1,1,6,6,6,1,6,1,6,6,1,6,6,6,1,1,1,6,1,1,1,1,6,1,1,6,1,6,1,6,6,6,6,1,
+6,6,6,1,6,6,1,6,6,1,6,6,1,6,1,1,1,1,1,6,6,6,6,1,6,6,6,1,6,6,1,6,1,6,6,
+1,6,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,6,6,
+1,6,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+6,6,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,1,1,
+6,1,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1,1,6,
+1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1,6,1,
+1,1,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,6,6,
+1,6,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,6,1,
+1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
+6,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,6,6,
+6,1,6,1,1,1,1,1,1,1,6,1,1,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,6,1,
+1,6,1,6,6,6,1,1,6,6,1,1,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,6,
+6,1,6,1,1,1,6,1,1,1,1,6,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1,6,1,
+6,1,1,1,1,1,1,6,6,6,6,1,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,6,6,1,
+6,1,6,1,1,6,6,1,6,1,6,1,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,1,1,6,6,
+6,6,6,1,6,6,6,1,6,6,6,6,1,1,1,6,1,6,6,6,1,1,6,6,1,6,1,6,6,1,6,6,1,6,1,
+1,6,1,6,1,1,1,6,6,6,6,6,6,1,6,1,1,1,6,6,1,1,1,6,1,6,6,6,1,1,6,6,1,6,1,
+1,1,6,1,6,1,1,6,1,1,1,6,6,6,6,1,6,6,6,6,1,1,1,1,6,1,6,6,1,1,6,1,1,1,6
+</data>
+ </layer>
+ <objectgroup id="2" name="SpawnPoints">
+  <object id="183" name="Start" type="Start" x="144" y="176">
+   <point/>
+  </object>
+  <object id="190" type="ExitDoor" x="480" y="256" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="3" name="Colliders">
+  <object id="43" type="Platform" x="64" y="0" width="432" height="48"/>
+  <object id="44" type="Platform" x="0" y="0" width="64" height="320"/>
+  <object id="105" type="Platform" x="496" y="0" width="64" height="320"/>
+  <object id="138" type="Platform" x="64" y="272" width="432" height="48"/>
+  <object id="192" type="Platform" x="64" y="192" width="160" height="80"/>
+ </objectgroup>
+ <objectgroup id="4" name="AudioTriggers">
+  <object id="181" name="Intro" type="AutoStart" x="128" y="144">
+   <properties>
+    <property name="Audio" type="file" value="../assets/audio/Level6-Intro.mp3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="191" name="Waste" type="Trigger" x="464" y="240" width="16" height="32">
+   <properties>
+    <property name="Audio" type="file" value="../assets/audio/Level6-End.mp3"/>
+    <property name="HoldInput" type="bool" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
