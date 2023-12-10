@@ -7,6 +7,7 @@ import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:hold_labs/game/button.dart';
 import 'package:hold_labs/game/game.dart';
+import 'package:hold_labs/game/gun_pickup.dart';
 import 'package:hold_labs/game/h_object.dart';
 import 'package:hold_labs/game/platform.dart';
 import 'package:hold_labs/game/player.dart';
@@ -16,7 +17,7 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
   Level(this.levelId);
 
   final int levelId;
-  late final Player _player;
+  late final Player player;
   final _loadedAudio = <String>[];
 
   @override
@@ -66,9 +67,9 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
             await add(portal);
 
             if (object.class_ == 'Start') {
-              _player = Player(position: object.position, priority: 1);
-              await add(_player);
-              game.camera.follow(_player.cameraTarget);
+              player = Player(position: object.position, priority: 1);
+              await add(player);
+              game.camera.follow(player.cameraTarget);
             } else {
               final portalHitbox = RectangleHitbox(
                 collisionType: CollisionType.passive,
@@ -122,6 +123,10 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
                 }
               }
             }
+            break;
+          case 'Guns':
+            final gunsPickup = GunPickup(position: object.position);
+            await add(gunsPickup);
             break;
         }
       }
@@ -191,7 +196,7 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
                 .last;
             if (audioPath != null) {
               FlameAudio.bgm.pause();
-              _player.moveLock = true;
+              player.moveLock = true;
 
               await FlameAudio.audioCache.load(audioPath);
               _loadedAudio.add(audioPath);
@@ -199,7 +204,7 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
               final audioplayer = await FlameAudio.playLongAudio(audioPath);
               audioplayer.onPlayerComplete.listen(
                 (event) {
-                  _player.moveLock = false;
+                  player.moveLock = false;
                   FlameAudio.bgm.resume();
                 },
               );
@@ -260,12 +265,12 @@ class Level extends PositionComponent with HasGameReference<HoldLabsGame> {
 
       if (holdInput) {
         FlameAudio.bgm.pause();
-        _player.moveLock = true;
+        player.moveLock = true;
       }
 
       final audioplayer = await FlameAudio.playLongAudio(filename);
       audioplayer.onPlayerComplete.listen((event) {
-        _player.moveLock = false;
+        player.moveLock = false;
         FlameAudio.bgm.resume();
       });
     }

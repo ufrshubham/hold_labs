@@ -1,16 +1,21 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
+import 'package:flame/geometry.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
 import 'package:hold_labs/game/game.dart';
+import 'package:hold_labs/game/gun_pickup.dart';
 import 'package:hold_labs/game/h_object.dart';
 import 'package:hold_labs/game/platform.dart';
 
 enum PlayerAnimation { idle, run, jump, hit }
+
+enum GunType { hot, cold }
 
 class Player extends PositionComponent
     with HasGameReference<HoldLabsGame>, CollisionCallbacks, KeyboardHandler {
@@ -43,6 +48,14 @@ class Player extends PositionComponent
   double vAxisValue = 0;
 
   final cameraTarget = PositionComponent();
+  final _gunHolder = PositionComponent();
+  late final SpriteGroupComponent<GunType> _gunComponent;
+
+  bool hasGun = false;
+
+  RaycastResult<ShapeHitbox>? results;
+  GunType? get gunType => _gunComponent.current;
+  Vector2 get gunPosition => _gunComponent.absolutePosition;
 
   @override
   Future<void> onLoad() async {
@@ -87,6 +100,26 @@ class Player extends PositionComponent
         position: Vector2(size.x * 0.55, size.y * 0.6),
         anchor: Anchor.center,
       ),
+    );
+
+    _gunHolder.position = size * 0.5;
+    await add(_gunHolder);
+
+    _gunComponent = SpriteGroupComponent<GunType>(
+      current: GunType.hot,
+      position: Vector2(8, 0),
+      anchor: Anchor.center,
+      sprites: {
+        GunType.hot: Sprite(
+          game.images.fromCache('Guns.png'),
+          srcSize: Vector2.all(16),
+        ),
+        GunType.cold: Sprite(
+          game.images.fromCache('Guns.png'),
+          srcSize: Vector2.all(16),
+          srcPosition: Vector2(16, 0),
+        ),
+      },
     );
   }
 
@@ -137,6 +170,10 @@ class Player extends PositionComponent
     if ((cameraTarget.position - absoluteCenter).length2 > 0.5) {
       cameraTarget.position.setValues(x, y);
     }
+
+    if (hasGun) {
+      _updateGunPosition();
+    }
   }
 
   @override
@@ -169,6 +206,10 @@ class Player extends PositionComponent
 
         position += separationVector;
       }
+    } else if (other is GunPickup) {
+      other.removeFromParent();
+      hasGun = true;
+      _addGuns();
     }
     super.onCollision(intersectionPoints, other);
   }
@@ -189,5 +230,51 @@ class Player extends PositionComponent
       }
     }
     return true;
+  }
+
+  void _addGuns() {
+    _gunHolder.add(_gunComponent);
+  }
+
+  void _updateGunPosition() {
+    if (_gunComponent.isMounted) {
+      final dir = game.mousePosition - position;
+      _gunHolder.angle =
+          (-dir.angleToSigned(_upVector)) * scale.x.sign - (pi * 0.5);
+
+      if (game.isFiring) {
+        final maxDistance = dir.normalize();
+
+        final ray = Ray2(
+          origin: _gunComponent.absolutePosition,
+          direction: dir,
+        );
+
+        results = game.collisionDetection
+            .raycast(ray, maxDistance: maxDistance, out: results);
+        if (results?.isActive ?? false) {
+          final other = results!.hitbox?.parent;
+          if (other is HObject) {
+            switch (_gunComponent.current) {
+              case GunType.hot:
+                other.isCooling = false;
+                other.isHeating = true;
+                break;
+              case GunType.cold:
+                other.isCooling = true;
+                other.isHeating = false;
+                break;
+              case null:
+                break;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  void switchGun() {
+    _gunComponent.current =
+        _gunComponent.current == GunType.cold ? GunType.hot : GunType.cold;
   }
 }

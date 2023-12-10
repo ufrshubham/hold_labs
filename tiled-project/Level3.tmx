@@ -92,7 +92,7 @@
   </object>
  </objectgroup>
  <objectgroup id="3" name="Colliders">
-  <object id="10" name="HObject" type="HObject" x="640" y="320" width="64" height="48">
+  <object id="10" name="HObject" type="HObject" x="640" y="304" width="64" height="80">
    <properties>
     <property name="AtomicSize" type="float" value="5"/>
     <property name="HotHeight" type="object" value="32"/>
